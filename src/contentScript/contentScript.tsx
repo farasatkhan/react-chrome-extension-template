@@ -3,17 +3,108 @@ import { prompts } from '../prompts';
 
 // Write your code here to Inject into the page
 const contentScript = () => {
-  console.log('Content script running on ChatGPT page');
+  // Detect which website we're on
+  const isClaudeWebsite = window.location.hostname.includes('claude.ai');
+  const isChatGPTWebsite = window.location.hostname.includes('chat.openai.com');
+  
+  console.log(`Content script running on ${isClaudeWebsite ? 'Claude' : 'ChatGPT'} page`);
   
   // Create and inject the style element for the dropdown only
   const style = document.createElement('style');
-  style.textContent = `
+  
+  // Define styles based on the website
+  const commonStyles = `
     .custom-dropdown-wrapper {
       display: inline-block;
       position: relative;
       margin-left: 8px;
       z-index: 100000;
     }
+    .custom-dropdown-content {
+      display: none;
+      position: fixed;
+      min-width: 180px;
+      max-height: 300px;
+      overflow-y: auto;
+      z-index: 2147483647;
+      scrollbar-width: thin;
+      transition: transform 0.2s ease-in-out;
+    }
+    .custom-dropdown-content.upward {
+      transform-origin: bottom center;
+      margin-top: 0;
+      margin-bottom: 4px;
+    }
+    .custom-dropdown-content.downward {
+      transform-origin: top center;
+      margin-top: 4px;
+      margin-bottom: 0;
+    }
+    .custom-dropdown-content.show {
+      display: block;
+    }
+    .custom-dropdown-item {
+      padding: 8px 12px;
+      text-decoration: none;
+      display: block;
+      transition: background-color 0.2s;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  `;
+
+  const claudeStyles = `
+    .custom-dropdown-button {
+      background-color: transparent;
+      border: 0.5px solid var(--border-300, rgb(64, 65, 79));
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      z-index: 100001;
+      transition: all 0.2s;
+      height: 32px;
+      color: var(--text-300, rgb(217, 217, 217));
+    }
+    .custom-dropdown-button:hover {
+      background-color: var(--bg-100, rgba(255, 255, 255, 0.1));
+      color: var(--text-200, rgba(217, 217, 217, 0.9));
+      border-color: var(--border-200, rgba(64, 65, 79, 0.5));
+    }
+    .custom-dropdown-content {
+      background-color: rgb(32, 33, 35);
+      box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.15);
+      border-radius: 12px;
+      border: 0.5px solid var(--border-300, rgba(64, 65, 79, 0.8));
+      scrollbar-color: #565869 #40414f;
+    }
+    .custom-dropdown-content::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-dropdown-content::-webkit-scrollbar-track {
+      background: var(--bg-200, #40414f);
+      border-radius: 4px;
+    }
+    .custom-dropdown-content::-webkit-scrollbar-thumb {
+      background-color: var(--bg-300, #565869);
+      border-radius: 4px;
+    }
+    .custom-dropdown-item {
+      color: var(--text-200, rgb(217, 217, 217));
+    }
+    .custom-dropdown-item:hover {
+      background-color: var(--bg-100, rgba(255, 255, 255, 0.1));
+    }
+    .custom-dropdown-item.selected {
+      background-color: var(--bg-200, rgba(255, 255, 255, 0.05));
+      font-weight: 500;
+    }
+  `;
+
+  const chatGPTStyles = `
     .custom-dropdown-button {
       background-color: transparent;
       border: none;
@@ -34,29 +125,11 @@ const contentScript = () => {
       background-color: rgba(255, 255, 255, 0.1);
     }
     .custom-dropdown-content {
-      display: none;
-      position: fixed;
       background-color: #202123;
-      min-width: 180px;
-      max-height: 300px;
-      overflow-y: auto;
       box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-      z-index: 2147483647;
       border-radius: 6px;
       border: 1px solid #4a5568;
-      scrollbar-width: thin;
       scrollbar-color: #565869 #40414f;
-      transition: transform 0.2s ease-in-out;
-    }
-    .custom-dropdown-content.upward {
-      transform-origin: bottom center;
-      margin-top: 0;
-      margin-bottom: 4px;
-    }
-    .custom-dropdown-content.downward {
-      transform-origin: top center;
-      margin-top: 4px;
-      margin-bottom: 0;
     }
     .custom-dropdown-content::-webkit-scrollbar {
       width: 6px;
@@ -69,17 +142,8 @@ const contentScript = () => {
       background-color: #565869;
       border-radius: 4px;
     }
-    .custom-dropdown-content.show {
-      display: block;
-    }
     .custom-dropdown-item {
       color: rgb(217, 217, 217);
-      padding: 8px 12px;
-      text-decoration: none;
-      display: block;
-      transition: background-color 0.2s;
-      cursor: pointer;
-      font-size: 14px;
     }
     .custom-dropdown-item:hover {
       background-color: rgba(255, 255, 255, 0.1);
@@ -89,21 +153,25 @@ const contentScript = () => {
       font-weight: 500;
     }
   `;
+
+  // Combine styles based on the website
+  style.textContent = commonStyles + (isClaudeWebsite ? claudeStyles : chatGPTStyles);
   
   // Remove any existing style element to prevent duplicates
-  const existingStyle = document.getElementById('chatgpt-green-theme');
+  const styleId = isClaudeWebsite ? 'claude-dropdown-style' : 'chatgpt-dropdown-style';
+  const existingStyle = document.getElementById(styleId);
   if (existingStyle) {
     existingStyle.remove();
   }
   
   // Add an ID to our style element
-  style.id = 'chatgpt-green-theme';
+  style.id = styleId;
   
   // Append the style element to the document head
   document.head.appendChild(style);
   
   // Log to confirm style injection
-  console.log('Green theme styles injected');
+  console.log(`${isClaudeWebsite ? 'Claude' : 'ChatGPT'} dropdown styles injected`);
 
   // Function to position the dropdown content
   const positionDropdown = (buttonEl: HTMLElement, dropdownEl: HTMLElement) => {
@@ -112,14 +180,11 @@ const contentScript = () => {
     const viewportHeight = window.innerHeight;
     const scrollY = window.scrollY;
     
-    // Calculate available space above and below
     const spaceBelow = viewportHeight - rect.bottom;
     const spaceAbove = rect.top;
     
-    // Decide whether to show upward or downward
     const shouldShowUpward = spaceBelow < dropdownHeight && spaceAbove > dropdownHeight;
     
-    // Update dropdown position and direction classes
     if (shouldShowUpward) {
       dropdownEl.style.top = `${rect.top + scrollY - dropdownHeight - 4}px`;
       dropdownEl.classList.add('upward');
@@ -130,14 +195,12 @@ const contentScript = () => {
       dropdownEl.classList.remove('upward');
     }
     
-    // Center horizontally relative to the button
     const dropdownWidth = dropdownEl.offsetWidth;
     const buttonCenter = rect.left + (rect.width / 2);
     const leftPosition = buttonCenter - (dropdownWidth / 2);
     
-    // Ensure the dropdown doesn't go off-screen horizontally
-    const minLeft = 10; // Minimum distance from left edge
-    const maxLeft = window.innerWidth - dropdownWidth - 10; // Maximum distance from right edge
+    const minLeft = 10;
+    const maxLeft = window.innerWidth - dropdownWidth - 10;
     const adjustedLeft = Math.min(Math.max(leftPosition, minLeft), maxLeft);
     
     dropdownEl.style.left = `${adjustedLeft}px`;
@@ -157,40 +220,53 @@ const contentScript = () => {
 
   // Create and inject the dropdown
   const createDropdown = () => {
+    const prefix = isClaudeWebsite ? 'claude' : 'chatgpt';
+    
     // Remove any existing dropdowns to ensure only one
-    const oldWrapper = document.getElementById('custom-chatgpt-dropdown-wrapper');
+    const oldWrapper = document.getElementById(`custom-${prefix}-dropdown-wrapper`);
     if (oldWrapper && oldWrapper.parentNode) {
       oldWrapper.parentNode.removeChild(oldWrapper);
     }
-    const oldContent = document.getElementById('custom-chatgpt-dropdown-content');
+    const oldContent = document.getElementById(`custom-${prefix}-dropdown-content`);
     if (oldContent && oldContent.parentNode) {
       oldContent.parentNode.removeChild(oldContent);
     }
 
-    // Find the Tools button container
-    const toolsButton = document.querySelector('[data-testid="composer-action-system-hint-button"]');
+    // Find the Tools button container based on the website
+    const toolsButtonSelector = isClaudeWebsite 
+      ? '[data-testid="input-menu-tools"]'
+      : '[data-testid="composer-action-system-hint-button"]';
+    
+    const toolsButton = document.querySelector(toolsButtonSelector);
     if (!toolsButton || !toolsButton.parentNode) return;
 
     // Create wrapper for dropdown
     const wrapper = document.createElement('div');
     wrapper.className = 'custom-dropdown-wrapper';
-    wrapper.id = 'custom-chatgpt-dropdown-wrapper';
+    wrapper.id = `custom-${prefix}-dropdown-wrapper`;
 
-    // Create dropdown button
+    // Create dropdown button with appropriate icon based on the website
     const dropdownButton = document.createElement('button');
     dropdownButton.className = 'custom-dropdown-button';
-    dropdownButton.innerHTML = `
-      <span id="custom-dropdown-selected" style="font-size: 14px;">Prompts</span>
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M1.5 3L5 6.5L8.5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    `;
+    dropdownButton.innerHTML = isClaudeWebsite
+      ? `
+        <span id="custom-dropdown-selected" style="font-size: 14px;">Templates</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 256 256">
+          <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+        </svg>
+      `
+      : `
+        <span id="custom-dropdown-selected" style="font-size: 14px;">Prompts</span>
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.5 3L5 6.5L8.5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
     dropdownButton.type = 'button';
 
     // Create dropdown content
     const dropdownContent = document.createElement('div');
     dropdownContent.className = 'custom-dropdown-content';
-    dropdownContent.id = 'custom-chatgpt-dropdown-content';
+    dropdownContent.id = `custom-${prefix}-dropdown-content`;
 
     // Add prompt items to dropdown
     prompts.forEach(prompt => {
@@ -201,26 +277,35 @@ const contentScript = () => {
       menuItem.onclick = (e) => {
         e.preventDefault();
         
-        // Remove selected class from all items
         dropdownContent.querySelectorAll('.custom-dropdown-item').forEach(item => {
           item.classList.remove('selected');
         });
         
-        // Add selected class to clicked item
         menuItem.classList.add('selected');
         
-        // Set selected item in dropdown
         const selectedSpan = dropdownButton.querySelector('#custom-dropdown-selected');
         if (selectedSpan) selectedSpan.textContent = prompt.name;
         dropdownContent.classList.remove('show');
         
-        // Update the text in the prompt textarea
-        const promptTextarea = document.getElementById('prompt-textarea');
-        if (promptTextarea) {
-          const pTag = promptTextarea.querySelector('p');
-          if (pTag) {
-            pTag.textContent = prompt.text;
-            pTag.classList.remove('placeholder');
+        // Update the text in the appropriate editor
+        if (isClaudeWebsite) {
+          const editor = document.querySelector('.ProseMirror');
+          if (editor) {
+            const pTag = editor.querySelector('p');
+            if (pTag) {
+              pTag.textContent = prompt.text;
+              pTag.classList.remove('is-empty');
+              pTag.classList.remove('is-editor-empty');
+            }
+          }
+        } else {
+          const promptTextarea = document.getElementById('prompt-textarea');
+          if (promptTextarea) {
+            const pTag = promptTextarea.querySelector('p');
+            if (pTag) {
+              pTag.textContent = prompt.text;
+              pTag.classList.remove('placeholder');
+            }
           }
         }
       };
@@ -232,12 +317,18 @@ const contentScript = () => {
       e.stopPropagation();
       const isShown = dropdownContent.classList.toggle('show');
       if (isShown) {
-        // Wait for the dropdown to be visible before positioning
         requestAnimationFrame(() => {
           positionDropdown(dropdownButton, dropdownContent);
         });
       }
     };
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!wrapper.contains(e.target as Node) && !dropdownContent.contains(e.target as Node)) {
+        dropdownContent.classList.remove('show');
+      }
+    });
 
     // Setup resize observer after dropdown is created
     setupResizeObserver(dropdownContent, dropdownButton);
@@ -252,12 +343,24 @@ const contentScript = () => {
     document.body.appendChild(dropdownContent);
   };
 
-  // Wait for the page to be fully loaded
-  if (document.readyState === 'complete') {
-    setTimeout(createDropdown, 1000);
-  } else {
-    window.addEventListener('load', () => setTimeout(createDropdown, 1000));
-  }
+  // Create a mutation observer to handle dynamic content loading
+  const observer = new MutationObserver((mutations, obs) => {
+    const toolsButtonSelector = isClaudeWebsite 
+      ? '[data-testid="input-menu-tools"]'
+      : '[data-testid="composer-action-system-hint-button"]';
+    
+    const toolsButton = document.querySelector(toolsButtonSelector);
+    if (toolsButton) {
+      createDropdown();
+      obs.disconnect(); // Stop observing once we find and add the dropdown
+    }
+  });
+
+  // Start observing the document with the configured parameters
+  observer.observe(document, {
+    childList: true,
+    subtree: true
+  });
 
   return null;
 };

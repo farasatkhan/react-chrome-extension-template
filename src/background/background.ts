@@ -11,7 +11,7 @@ chrome.runtime.onMessage.addListener((data) => {
 // Inject content script only on ChatGPT pages
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   if (tab.url?.startsWith("chrome://")) return undefined;
-  if (!tab.url?.includes("chatgpt.com")) return undefined;
+  if (!(tab.url?.includes("claude.ai") || tab.url?.includes("chatgpt.com"))) return undefined;
 
   console.log("Injecting content script into ChatGPT page");
 
