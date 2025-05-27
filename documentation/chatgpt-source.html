@@ -1,0 +1,729 @@
+<div class="flex h-full w-full flex-col">
+  <div class="relative flex h-full w-full flex-1 transition-colors z-0">
+    <div class="relative flex h-full w-full flex-row">
+      <div class="relative flex h-full max-w-full flex-1 flex-col">
+        <div
+          class="draggable h-header-height bg-token-main-surface-primary sticky top-0 z-10 flex items-center justify-center border-transparent ps-0 md:hidden [box-shadow:var(--sharp-edge-top-shadow-placeholder)]"
+        >
+          <div
+            class="no-draggable absolute start-0 top-0 bottom-0 ms-3 inline-flex items-center justify-center"
+          >
+            <button
+              type="button"
+              class="hover:text-token-text-primary inline-flex rounded-md focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset active:opacity-50"
+              data-testid="open-sidebar-button"
+            >
+              <span class="sr-only">Open sidebar</span
+              ><svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-lg text-token-text-secondary mx-2"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M3 8C3 7.44772 3.44772 7 4 7H20C20.5523 7 21 7.44772 21 8C21 8.55228 20.5523 9 20 9H4C3.44772 9 3 8.55228 3 8ZM3 16C3 15.4477 3.44772 15 4 15H14C14.5523 15 15 15.4477 15 16C15 16.5523 14.5523 17 14 17H4C3.44772 17 3 16.5523 3 16Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div class="no-draggable">
+            <button
+              aria-label=""
+              type="button"
+              id="radix-«r2»"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              data-state="closed"
+              data-testid="model-switcher-dropdown-button"
+              class="group flex cursor-pointer items-center gap-1 rounded-lg py-1.5 px-3 text-lg hover:bg-token-main-surface-secondary font-normal whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2"
+              style="view-transition-name: var(--vt-thread-model-switcher)"
+            >
+              <div>ChatGPT</div>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon-md text-token-text-tertiary"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M5.29289 9.29289C5.68342 8.90237 6.31658 8.90237 6.70711 9.29289L12 14.5858L17.2929 9.29289C17.6834 8.90237 18.3166 8.90237 18.7071 9.29289C19.0976 9.68342 19.0976 10.3166 18.7071 10.7071L12.7071 16.7071C12.5196 16.8946 12.2652 17 12 17C11.7348 17 11.4804 16.8946 11.2929 16.7071L5.29289 10.7071C4.90237 10.3166 4.90237 9.68342 5.29289 9.29289Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div
+            class="no-draggable absolute end-0 top-0 bottom-0 me-3 inline-flex items-center justify-center"
+          >
+            <span class="" data-state="closed"
+              ><button
+                class="btn relative btn-ghost text-token-text-secondary rounded-lg"
+                aria-label="Turn on temporary chat"
+              >
+                <div class="flex w-full items-center justify-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    fill="none"
+                    viewBox="0 0 14 14"
+                    aria-label=""
+                    class="icon-lg"
+                  >
+                    <path
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                      d="M6.319 1.334a.667.667 0 0 1-.512.792 5.43 5.43 0 0 0-2.602 1.362.667.667 0 1 1-.918-.967A6.76 6.76 0 0 1 5.527.822a.667.667 0 0 1 .792.512m1.363 0a.667.667 0 0 1 .791-.512 6.76 6.76 0 0 1 3.24 1.699.667.667 0 1 1-.917.967 5.43 5.43 0 0 0-2.602-1.362.667.667 0 0 1-.512-.792M1.51 4.614c.348.12.533.5.413.848a4.7 4.7 0 0 0 0 3.076.667.667 0 0 1-1.26.435 6.04 6.04 0 0 1 0-3.945.666.666 0 0 1 .847-.413m10.979 0a.667.667 0 0 1 .847.414A6 6 0 0 1 13.667 7a6 6 0 0 1-.33 1.973.667.667 0 1 1-1.26-.435 4.7 4.7 0 0 0 0-3.076.667.667 0 0 1 .413-.847M2.27 10.352a.667.667 0 0 1 .479.812q-.052.2-.111.397.629-.097 1.228-.267a.67.67 0 0 1 .496.054c.445.238.93.417 1.445.528a.667.667 0 1 1-.28 1.303 7 7 0 0 1-1.553-.533c-.73.189-1.479.305-2.266.354a.667.667 0 0 1-.664-.905c.164-.425.305-.844.414-1.264a.667.667 0 0 1 .812-.48m9.468.186a.666.666 0 0 1-.024.942 6.76 6.76 0 0 1-3.24 1.7.667.667 0 0 1-.28-1.304 5.43 5.43 0 0 0 2.601-1.362.667.667 0 0 1 .943.024"
+                      clip-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div></button
+            ></span>
+          </div>
+        </div>
+        <div
+          class="no-draggable bg-token-main-surface-primary flex w-full items-center justify-center md:hidden"
+        ></div>
+        <main
+          class="transition-width relative h-full w-full flex-1 overflow-auto"
+          id="main"
+          z-index="-1"
+        >
+          <div id="thread" class="group/thread @container/thread h-full w-full">
+            <div
+              role="presentation"
+              class="composer-parent flex flex-col focus-visible:outline-0 h-full"
+            >
+              <div
+                id="page-header"
+                class="draggable no-draggable-children top-0 p-3 flex items-center justify-between z-20 h-header-height bg-token-main-surface-primary pointer-events-none select-none [view-transition-name:var(--vt-page-header)] *:pointer-events-auto motion-safe:transition max-md:hidden absolute start-0 end-0 @[84rem]/thread:absolute @[84rem]/thread:start-0 @[84rem]/thread:end-0 @[84rem]/thread:bg-transparent @[84rem]/thread:shadow-none! [box-shadow:var(--sharp-edge-top-shadow-placeholder)]"
+              >
+                <div
+                  class="absolute start-1/2 ltr:-translate-x-1/2 rtl:translate-x-1/2"
+                ></div>
+                <div class="flex items-center">
+                  <div class="flex items-center">
+                    <span class="flex" data-state="closed"
+                      ><button
+                        aria-label="Open sidebar"
+                        class="text-token-text-secondary no-draggable focus-visible:bg-token-surface-hover enabled:hover:bg-token-surface-hover disabled:text-token-text-quaternary h-10 w-10 rounded-lg px-2 focus-visible:outline-0"
+                      >
+                        <svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon-xl-heavy"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M8.85719 3H15.1428C16.2266 2.99999 17.1007 2.99998 17.8086 3.05782C18.5375 3.11737 19.1777 3.24318 19.77 3.54497C20.7108 4.02433 21.4757 4.78924 21.955 5.73005C22.2568 6.32234 22.3826 6.96253 22.4422 7.69138C22.5 8.39925 22.5 9.27339 22.5 10.3572V13.6428C22.5 14.7266 22.5 15.6008 22.4422 16.3086C22.3826 17.0375 22.2568 17.6777 21.955 18.27C21.4757 19.2108 20.7108 19.9757 19.77 20.455C19.1777 20.7568 18.5375 20.8826 17.8086 20.9422C17.1008 21 16.2266 21 15.1428 21H8.85717C7.77339 21 6.89925 21 6.19138 20.9422C5.46253 20.8826 4.82234 20.7568 4.23005 20.455C3.28924 19.9757 2.52433 19.2108 2.04497 18.27C1.74318 17.6777 1.61737 17.0375 1.55782 16.3086C1.49998 15.6007 1.49999 14.7266 1.5 13.6428V10.3572C1.49999 9.27341 1.49998 8.39926 1.55782 7.69138C1.61737 6.96253 1.74318 6.32234 2.04497 5.73005C2.52433 4.78924 3.28924 4.02433 4.23005 3.54497C4.82234 3.24318 5.46253 3.11737 6.19138 3.05782C6.89926 2.99998 7.77341 2.99999 8.85719 3ZM6.35424 5.05118C5.74907 5.10062 5.40138 5.19279 5.13803 5.32698C4.57354 5.6146 4.1146 6.07354 3.82698 6.63803C3.69279 6.90138 3.60062 7.24907 3.55118 7.85424C3.50078 8.47108 3.5 9.26339 3.5 10.4V13.6C3.5 14.7366 3.50078 15.5289 3.55118 16.1458C3.60062 16.7509 3.69279 17.0986 3.82698 17.362C4.1146 17.9265 4.57354 18.3854 5.13803 18.673C5.40138 18.8072 5.74907 18.8994 6.35424 18.9488C6.97108 18.9992 7.76339 19 8.9 19H9.5V5H8.9C7.76339 5 6.97108 5.00078 6.35424 5.05118ZM11.5 5V19H15.1C16.2366 19 17.0289 18.9992 17.6458 18.9488C18.2509 18.8994 18.5986 18.8072 18.862 18.673C19.4265 18.3854 19.8854 17.9265 20.173 17.362C20.3072 17.0986 20.3994 16.7509 20.4488 16.1458C20.4992 15.5289 20.5 14.7366 20.5 13.6V10.4C20.5 9.26339 20.4992 8.47108 20.4488 7.85424C20.3994 7.24907 20.3072 6.90138 20.173 6.63803C19.8854 6.07354 19.4265 5.6146 18.862 5.32698C18.5986 5.19279 18.2509 5.10062 17.6458 5.05118C17.0289 5.00078 16.2366 5 15.1 5H11.5ZM5 8.5C5 7.94772 5.44772 7.5 6 7.5H7C7.55229 7.5 8 7.94772 8 8.5C8 9.05229 7.55229 9.5 7 9.5H6C5.44772 9.5 5 9.05229 5 8.5ZM5 12C5 11.4477 5.44772 11 6 11H7C7.55229 11 8 11.4477 8 12C8 12.5523 7.55229 13 7 13H6C5.44772 13 5 12.5523 5 12Z"
+                            fill="currentColor"
+                          ></path>
+                        </svg></button></span
+                    ><span class="flex" data-state="closed"
+                      ><a
+                        aria-label="New chat"
+                        class="text-token-text-secondary no-draggable hover:bg-token-surface-hover focus-visible:bg-token-surface-hover flex h-10 w-10 items-center justify-center rounded-lg px-2 focus-visible:outline-0"
+                        href="/"
+                        data-discover="true"
+                        ><svg
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="icon-xl-heavy"
+                        >
+                          <path
+                            d="M15.6729 3.91287C16.8918 2.69392 18.8682 2.69392 20.0871 3.91287C21.3061 5.13182 21.3061 7.10813 20.0871 8.32708L14.1499 14.2643C13.3849 15.0293 12.3925 15.5255 11.3215 15.6785L9.14142 15.9899C8.82983 16.0344 8.51546 15.9297 8.29289 15.7071C8.07033 15.4845 7.96554 15.1701 8.01005 14.8586L8.32149 12.6785C8.47449 11.6075 8.97072 10.615 9.7357 9.85006L15.6729 3.91287ZM18.6729 5.32708C18.235 4.88918 17.525 4.88918 17.0871 5.32708L11.1499 11.2643C10.6909 11.7233 10.3932 12.3187 10.3014 12.9613L10.1785 13.8215L11.0386 13.6986C11.6812 13.6068 12.2767 13.3091 12.7357 12.8501L18.6729 6.91287C19.1108 6.47497 19.1108 5.76499 18.6729 5.32708ZM11 3.99929C11.0004 4.55157 10.5531 4.99963 10.0008 5.00007C9.00227 5.00084 8.29769 5.00827 7.74651 5.06064C7.20685 5.11191 6.88488 5.20117 6.63803 5.32695C6.07354 5.61457 5.6146 6.07351 5.32698 6.63799C5.19279 6.90135 5.10062 7.24904 5.05118 7.8542C5.00078 8.47105 5 9.26336 5 10.4V13.6C5 14.7366 5.00078 15.5289 5.05118 16.1457C5.10062 16.7509 5.19279 17.0986 5.32698 17.3619C5.6146 17.9264 6.07354 18.3854 6.63803 18.673C6.90138 18.8072 7.24907 18.8993 7.85424 18.9488C8.47108 18.9992 9.26339 19 10.4 19H13.6C14.7366 19 15.5289 18.9992 16.1458 18.9488C16.7509 18.8993 17.0986 18.8072 17.362 18.673C17.9265 18.3854 18.3854 17.9264 18.673 17.3619C18.7988 17.1151 18.8881 16.7931 18.9393 16.2535C18.9917 15.7023 18.9991 14.9977 18.9999 13.9992C19.0003 13.4469 19.4484 12.9995 20.0007 13C20.553 13.0004 21.0003 13.4485 20.9999 14.0007C20.9991 14.9789 20.9932 15.7808 20.9304 16.4426C20.8664 17.116 20.7385 17.7136 20.455 18.2699C19.9757 19.2107 19.2108 19.9756 18.27 20.455C17.6777 20.7568 17.0375 20.8826 16.3086 20.9421C15.6008 21 14.7266 21 13.6428 21H10.3572C9.27339 21 8.39925 21 7.69138 20.9421C6.96253 20.8826 6.32234 20.7568 5.73005 20.455C4.78924 19.9756 4.02433 19.2107 3.54497 18.2699C3.24318 17.6776 3.11737 17.0374 3.05782 16.3086C2.99998 15.6007 2.99999 14.7266 3 13.6428V10.3572C2.99999 9.27337 2.99998 8.39922 3.05782 7.69134C3.11737 6.96249 3.24318 6.3223 3.54497 5.73001C4.02433 4.7892 4.78924 4.0243 5.73005 3.54493C6.28633 3.26149 6.88399 3.13358 7.55735 3.06961C8.21919 3.00673 9.02103 3.00083 9.99922 3.00007C10.5515 2.99964 10.9996 3.447 11 3.99929Z"
+                            fill="currentColor"
+                          ></path></svg></a
+                    ></span>
+                  </div>
+                  <button
+                    aria-label=""
+                    type="button"
+                    id="radix-«r4»"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    data-state="closed"
+                    data-testid="model-switcher-dropdown-button"
+                    class="group flex cursor-pointer items-center gap-1 rounded-lg py-1.5 px-3 text-lg hover:bg-token-main-surface-secondary font-normal whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-offset-2"
+                    style="
+                      view-transition-name: var(--vt-thread-model-switcher);
+                    "
+                  >
+                    <div>ChatGPT</div>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon-md text-token-text-tertiary"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M5.29289 9.29289C5.68342 8.90237 6.31658 8.90237 6.70711 9.29289L12 14.5858L17.2929 9.29289C17.6834 8.90237 18.3166 8.90237 18.7071 9.29289C19.0976 9.68342 19.0976 10.3166 18.7071 10.7071L12.7071 16.7071C12.5196 16.8946 12.2652 17 12 17C11.7348 17 11.4804 16.8946 11.2929 16.7071L5.29289 10.7071C4.90237 10.3166 4.90237 9.68342 5.29289 9.29289Z"
+                        fill="currentColor"
+                      ></path>
+                    </svg>
+                  </button>
+                </div>
+                <div
+                  class="flex items-center gap-2 pe-1 leading-[0]"
+                  id="conversation-header-actions"
+                >
+                  <span class="" data-state="closed"
+                    ><button
+                      class="hover:bg-token-bg-tertiary group-radix-state-open:bg-token-bg-tertiary rounded-full p-2.5"
+                      aria-label="Turn on temporary chat"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        fill="none"
+                        viewBox="0 0 14 14"
+                        class="h-5 w-5"
+                      >
+                        <path
+                          fill="currentColor"
+                          fill-rule="evenodd"
+                          d="M6.319 1.334a.667.667 0 0 1-.512.792 5.43 5.43 0 0 0-2.602 1.362.667.667 0 1 1-.918-.967A6.76 6.76 0 0 1 5.527.822a.667.667 0 0 1 .792.512m1.363 0a.667.667 0 0 1 .791-.512 6.76 6.76 0 0 1 3.24 1.699.667.667 0 1 1-.917.967 5.43 5.43 0 0 0-2.602-1.362.667.667 0 0 1-.512-.792M1.51 4.614c.348.12.533.5.413.848a4.7 4.7 0 0 0 0 3.076.667.667 0 0 1-1.26.435 6.04 6.04 0 0 1 0-3.945.666.666 0 0 1 .847-.413m10.979 0a.667.667 0 0 1 .847.414A6 6 0 0 1 13.667 7a6 6 0 0 1-.33 1.973.667.667 0 1 1-1.26-.435 4.7 4.7 0 0 0 0-3.076.667.667 0 0 1 .413-.847M2.27 10.352a.667.667 0 0 1 .479.812q-.052.2-.111.397.629-.097 1.228-.267a.67.67 0 0 1 .496.054c.445.238.93.417 1.445.528a.667.667 0 1 1-.28 1.303 7 7 0 0 1-1.553-.533c-.73.189-1.479.305-2.266.354a.667.667 0 0 1-.664-.905c.164-.425.305-.844.414-1.264a.667.667 0 0 1 .812-.48m9.468.186a.666.666 0 0 1-.024.942 6.76 6.76 0 0 1-3.24 1.7.667.667 0 0 1-.28-1.304 5.43 5.43 0 0 0 2.601-1.362.667.667 0 0 1 .943.024"
+                          clip-rule="evenodd"
+                        ></path>
+                      </svg></button></span
+                  ><button
+                    aria-label="Open Profile Menu"
+                    data-testid="profile-button"
+                    class="user-select-none text-token-text-secondary hover:text-token-text-primary hover:bg-token-interactive-bg-secondary-hover radix-state-open:text-token-text-secondary flex h-10 w-10 items-center justify-center rounded-full px-1 transition focus-visible:outline-0"
+                    type="button"
+                    id="radix-«R19ql9t9jm595j5»"
+                    aria-haspopup="menu"
+                    aria-expanded="false"
+                    data-state="closed"
+                  >
+                    <div class="relative">
+                      <div class="relative">
+                        <div class="relative flex overflow-hidden rounded-full">
+                          <img
+                            src="https://s.gravatar.com/avatar/a4889389026afa33b26166bc3447c769?s=480&amp;r=pg&amp;d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Ffa.png"
+                            alt="User"
+                            width="28"
+                            height="28"
+                            class="rounded-xs"
+                            referrerpolicy="no-referrer"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="flex basis-auto flex-col shrink min-[510px]:max-[768px]:mt-[25dvh]! @max-[31.9rem]/thread:grow @max-[31.9rem]/thread:justify-center @lg/thread:mt-[calc(30dvh+25px)]"
+              >
+                <div
+                  class="flex items-center justify-center @lg/thread:items-end"
+                >
+                  <div
+                    class="mb-7 hidden text-center @lg/thread:block @lg/thread:block"
+                  >
+                    <div
+                      class="relative inline-flex justify-center text-center text-2xl leading-9 font-semibold"
+                    >
+                      <div>
+                        <div
+                          class="grid-cols-1 items-center justify-end"
+                          style="
+                            view-transition-name: var(
+                              --vt-splash-screen-headline
+                            );
+                          "
+                        >
+                          <h1
+                            class="inline-flex min-h-10.5 items-baseline text-[28px] leading-[34px] font-normal tracking-[0.38px] whitespace-pre-wrap motion-safe:[transition:0.25s_transform_var(--spring-standard),0.2s_opacity_var(--spring-standard),0.3s_visibility_var(--spring-standard)] opacity-100"
+                            aria-hidden="false"
+                            style="transform: translateY(0px)"
+                          >
+                            <div class="px-1 text-pretty whitespace-pre-wrap">
+                              What can I help with?
+                            </div>
+                          </h1>
+                          <div
+                            class="absolute bottom-0 motion-safe:[transition:0.25s_transform_var(--spring-standard),0.2s_opacity_var(--spring-standard),0.3s_visibility_var(--spring-standard)] invisible translate-y-10 opacity-0"
+                            aria-hidden="true"
+                          >
+                            <div class="flex flex-col items-center">
+                              <h1
+                                class="mb-1 text-[28px] leading-[34px] font-normal tracking-[0.38px]"
+                                data-testid="temporary-chat-label"
+                              >
+                                <input
+                                  class="sr-only"
+                                  id="temporary-chat-checkbox"
+                                  type="checkbox"
+                                  readonly=""
+                                  name="temporary-chat-checkbox"
+                                  checked=""
+                                />Temporary Chat
+                              </h1>
+                              <div
+                                class="text-token-text-secondary max-w-xl text-center text-[15px] leading-[18px] font-normal tracking-[-0.23px]"
+                              >
+                                This chat won't appear in history, use or update
+                                ChatGPT's memory, or be used to train our
+                                models. For safety purposes, we may keep a copy
+                                of this chat for up to 30 days.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="text-token-text-primary mt-[var(--screen-optical-compact-offset-amount)] [display:var(--display-hidden-until-loaded,flex)] shrink flex-col items-center justify-center overflow-hidden h-full @lg/thread:hidden"
+                    style="opacity: 1"
+                  >
+                    <div
+                      class="relative inline-flex justify-center text-center text-2xl leading-9 font-semibold"
+                    >
+                      <div>
+                        <div
+                          class="grid-cols-1 items-center justify-end"
+                          style="
+                            view-transition-name: var(
+                              --vt-splash-screen-headline
+                            );
+                          "
+                        >
+                          <h1
+                            class="inline-flex min-h-10.5 items-baseline text-[28px] leading-[34px] font-normal tracking-[0.38px] whitespace-pre-wrap motion-safe:[transition:0.25s_transform_var(--spring-standard),0.2s_opacity_var(--spring-standard),0.3s_visibility_var(--spring-standard)] opacity-100"
+                            aria-hidden="false"
+                            style="transform: translateY(0px)"
+                          >
+                            <div class="px-1 text-pretty whitespace-pre-wrap">
+                              What can I help with?
+                            </div>
+                          </h1>
+                          <div
+                            class="absolute bottom-0 motion-safe:[transition:0.25s_transform_var(--spring-standard),0.2s_opacity_var(--spring-standard),0.3s_visibility_var(--spring-standard)] invisible translate-y-10 opacity-0"
+                            aria-hidden="true"
+                          >
+                            <div class="flex flex-col items-center">
+                              <h1
+                                class="mb-1 text-[28px] leading-[34px] font-normal tracking-[0.38px]"
+                                data-testid="temporary-chat-label"
+                              >
+                                <input
+                                  class="sr-only"
+                                  id="temporary-chat-checkbox"
+                                  type="checkbox"
+                                  readonly=""
+                                  name="temporary-chat-checkbox"
+                                  checked=""
+                                />Temporary Chat
+                              </h1>
+                              <div
+                                class="text-token-text-secondary max-w-xl text-center text-[15px] leading-[18px] font-normal tracking-[-0.23px]"
+                              >
+                                This chat won't appear in history, use or update
+                                ChatGPT's memory, or be used to train our
+                                models. For safety purposes, we may keep a copy
+                                of this chat for up to 30 days.
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="h-[116px]" style="opacity: 1"></div>
+                  </div>
+                </div>
+              </div>
+              <div
+                id="thread-bottom-container"
+                class="isolate z-3 w-full basis-auto has-data-has-thread-error:pt-2 has-data-has-thread-error:[box-shadow:var(--sharp-edge-bottom-shadow)] md:border-transparent md:pt-0 dark:border-white/20 md:dark:border-transparent mb-4 @lg/thread:grow flex flex-col"
+              >
+                <div id="thread-bottom">
+                  <div
+                    class="text-base mx-auto [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"
+                  >
+                    <div
+                      class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6"
+                    >
+                      <div class="flex justify-center empty:hidden"></div>
+                      <div
+                        class="max-xs:[--force-hide-label:none] relative z-1 flex h-full max-w-full flex-1 flex-col"
+                        type="button"
+                        aria-haspopup="dialog"
+                        aria-expanded="false"
+                        aria-controls="radix-«R34ip9t9jm595j5»"
+                        data-state="closed"
+                      >
+                        <form
+                          class="w-full [view-transition-name:var(--vt-composer)]"
+                          data-type="unified-composer"
+                        >
+                          <div
+                            class="flex w-full cursor-text flex-col items-center justify-center rounded-[28px] bg-clip-padding contain-inline-size overflow-clip shadow-short bg-token-bg-primary dark:bg-[#303030]"
+                          >
+                            <div
+                              class="relative flex w-full items-end px-3 py-3"
+                            >
+                              <div
+                                class="relative flex w-full flex-auto flex-col"
+                              >
+                                <div
+                                  class="relative ms-1.5 grid grid-cols-[auto_minmax(0,1fr)]"
+                                >
+                                  <div class="items-top flex justify-center">
+                                    <div style="opacity: 1"></div>
+                                  </div>
+                                  <div
+                                    class="relative flex-auto bg-transparent pt-0.5"
+                                    style="
+                                      margin-bottom: -20px;
+                                      transform: translateY(-7px);
+                                    "
+                                  >
+                                    <div
+                                      class="flex flex-col justify-start"
+                                      style="min-height: 0"
+                                    >
+                                      <div class="flex min-h-12 items-start">
+                                        <div class="max-w-full min-w-0 flex-1">
+                                          <div
+                                            class="_prosemirror-parent_kfgfu_2 text-token-text-primary max-h-[25dvh] max-h-52 -mx-3 px-3 overflow-auto [scrollbar-width:thin] default-browser vertical-scroll-fade-mask min-h-12 pe-3"
+                                          >
+                                            <textarea
+                                              class="text-token-text-primary placeholder:text-token-text-tertiary block h-10 w-full resize-none border-0 bg-transparent px-0 py-2 ring-0 placeholder:ps-px"
+                                              autofocus=""
+                                              placeholder="Ask anything"
+                                              data-virtualkeyboard="true"
+                                              style="display: none"
+                                            ></textarea>
+                                            <script nonce="">
+                                              window.__oai_logHTML
+                                                ? window.__oai_logHTML()
+                                                : (window.__oai_SSR_HTML =
+                                                    window.__oai_SSR_HTML ||
+                                                    Date.now());
+                                              requestAnimationFrame(
+                                                function () {
+                                                  window.__oai_logTTI
+                                                    ? window.__oai_logTTI()
+                                                    : (window.__oai_SSR_TTI =
+                                                        window.__oai_SSR_TTI ||
+                                                        Date.now());
+                                                }
+                                              );
+                                            </script>
+                                            <div
+                                              contenteditable="true"
+                                              translate="no"
+                                              class="ProseMirror"
+                                              id="prompt-textarea"
+                                              data-virtualkeyboard="true"
+                                            >
+                                              <p
+                                                data-placeholder="Ask anything"
+                                                class="placeholder"
+                                              >
+                                                <br
+                                                  class="ProseMirror-trailingBreak"
+                                                />
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="justify-content-end relative ms-2 flex w-full flex-auto flex-col"
+                                >
+                                  <div class="flex-auto"></div>
+                                </div>
+                                <div style="height: 48px"></div>
+                              </div>
+                              <div
+                                class="bg-primary-surface-primary absolute start-3 end-0 bottom-3 z-2 flex items-center"
+                              >
+                                <div class="w-full">
+                                  <div
+                                    data-testid="composer-footer-actions"
+                                    class="flex items-center"
+                                    style="margin-right: 102px"
+                                  >
+                                    <div
+                                      data-testid="composer-action-file-upload"
+                                      style="
+                                        view-transition-name: var(
+                                          --vt-composer-attach-file-action
+                                        );
+                                      "
+                                    >
+                                      <div class="relative">
+                                        <div class="flex flex-col">
+                                          <input
+                                            multiple=""
+                                            type="file"
+                                            style="
+                                              border: 0;
+                                              clip: rect(0, 0, 0, 0);
+                                              clip-path: inset(50%);
+                                              height: 1px;
+                                              margin: 0 -1px -1px 0;
+                                              overflow: hidden;
+                                              padding: 0;
+                                              position: absolute;
+                                              width: 1px;
+                                              white-space: nowrap;
+                                            "
+                                            tabindex="-1"
+                                            class="hidden"
+                                          /><span class="hidden"></span
+                                          ><span
+                                            class="flex"
+                                            data-state="closed"
+                                            ><button
+                                              type="button"
+                                              id="upload-file-btn"
+                                              aria-haspopup="menu"
+                                              aria-expanded="false"
+                                              data-state="closed"
+                                              class="composer-btn"
+                                              aria-label="Add photos and files"
+                                            >
+                                              <svg
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 18 18"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                aria-label=""
+                                                class="icon-md"
+                                              >
+                                                <path
+                                                  d="M8.25 15.75V9.75H2.25C1.83579 9.75 1.5 9.41421 1.5 9C1.5 8.58579 1.83579 8.25 2.25 8.25H8.25V2.25C8.25 1.83579 8.58579 1.5 9 1.5C9.41421 1.5 9.75 1.83579 9.75 2.25V8.25H15.75L15.8271 8.25391C16.2051 8.29253 16.5 8.61183 16.5 9C16.5 9.38817 16.2051 9.70747 15.8271 9.74609L15.75 9.75H9.75V15.75C9.75 16.1642 9.41421 16.5 9 16.5C8.58579 16.5 8.25 16.1642 8.25 15.75Z"
+                                                  fill="currentColor"
+                                                ></path>
+                                              </svg></button
+                                          ></span>
+                                          <div
+                                            class="w-fit"
+                                            type="button"
+                                            aria-haspopup="dialog"
+                                            aria-expanded="false"
+                                            aria-controls="radix-«R12b5dj4ip9t9jm595j5»"
+                                            data-state="closed"
+                                          >
+                                            <div></div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div
+                                      style="
+                                        view-transition-name: var(
+                                          --vt-composer-system-hint-action
+                                        );
+                                      "
+                                      data-testid="composer-action-system-hint-button"
+                                    >
+                                      <span class="hidden"></span
+                                      ><button
+                                        type="button"
+                                        id="system-hint-button"
+                                        aria-haspopup="menu"
+                                        aria-expanded="false"
+                                        data-state="closed"
+                                        class="composer-btn"
+                                        data-pill=""
+                                        aria-label="Choose tool"
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          width="24"
+                                          height="24"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          aria-label=""
+                                          class="icon-md"
+                                        >
+                                          <path
+                                            fill="currentColor"
+                                            fill-rule="evenodd"
+                                            d="M14.5 5a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-3.874 1a4.002 4.002 0 0 1 7.748 0H20a1 1 0 1 1 0 2h-1.626a4.002 4.002 0 0 1-7.748 0H4a1 1 0 0 1 0-2h6.626ZM9.5 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-3.874 1a4.002 4.002 0 0 1 7.748 0H20a1 1 0 1 1 0 2h-6.626a4.002 4.002 0 0 1-7.748 0H4a1 1 0 1 1 0-2h1.626Z"
+                                            clip-rule="evenodd"
+                                          ></path></svg
+                                        ><span class="ms-1.5 me-0.5"
+                                          >Tools</span
+                                        >
+                                      </button>
+                                    </div>
+                                    <div></div>
+                                    <div></div>
+                                  </div>
+                                  <div
+                                    class="absolute end-3 bottom-0 flex items-center gap-2"
+                                    data-testid="composer-trailing-actions"
+                                  >
+                                    <div
+                                      class="ms-auto flex items-center gap-1.5"
+                                    >
+                                      <span class="" data-state="closed"
+                                        ><button
+                                          aria-label="Dictate button"
+                                          type="button"
+                                          class="composer-btn"
+                                        >
+                                          <svg
+                                            width="18"
+                                            height="18"
+                                            viewBox="0 0 18 18"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            aria-label=""
+                                            class="h-[18px] w-[18px]"
+                                            font-size="inherit"
+                                          >
+                                            <path
+                                              d="M11.165 4.41699C11.165 3.22048 10.1955 2.25018 8.99902 2.25C7.80241 2.25 6.83203 3.22038 6.83203 4.41699V8.16699C6.83221 9.36346 7.80252 10.333 8.99902 10.333C10.1954 10.3328 11.1649 9.36335 11.165 8.16699V4.41699ZM12.665 8.16699C12.6649 10.1918 11.0238 11.8328 8.99902 11.833C6.97409 11.833 5.33221 10.1919 5.33203 8.16699V4.41699C5.33203 2.39195 6.97398 0.75 8.99902 0.75C11.0239 0.750176 12.665 2.39206 12.665 4.41699V8.16699Z"
+                                              fill="currentColor"
+                                            ></path>
+                                            <path
+                                              d="M14.8058 9.11426C14.4089 8.99623 13.9915 9.22244 13.8732 9.61914C13.2481 11.7194 11.3018 13.25 9.00011 13.25C6.69845 13.25 4.75214 11.7194 4.12706 9.61914C4.00876 9.22245 3.59126 8.99626 3.19444 9.11426C2.79744 9.23241 2.57141 9.65085 2.68956 10.0479C3.43005 12.5353 5.60114 14.4067 8.25011 14.707V15.75H6.91612C6.50191 15.75 6.16612 16.0858 6.16612 16.5C6.16612 16.9142 6.50191 17.25 6.91612 17.25H11.0831L11.1593 17.2461C11.5376 17.2078 11.8331 16.8884 11.8331 16.5C11.8331 16.1116 11.5376 15.7922 11.1593 15.7539L11.0831 15.75H9.75011V14.707C12.3991 14.4066 14.5702 12.5353 15.3107 10.0479C15.4288 9.65085 15.2028 9.23241 14.8058 9.11426Z"
+                                              fill="currentColor"
+                                            ></path>
+                                          </svg></button
+                                      ></span>
+                                      <div
+                                        class="min-w-9"
+                                        data-testid="composer-speech-button-container"
+                                      >
+                                        <span class="" data-state="closed"
+                                          ><button
+                                            inputstate="default"
+                                            state="disabled"
+                                            composercontroller="[object Object]"
+                                            disablereason="empty_text_content"
+                                            data-testid="composer-speech-button"
+                                            aria-label="Start voice mode"
+                                            class="relative flex h-9 items-center justify-center rounded-full bg-black text-white transition-colors disabled:text-gray-50 disabled:opacity-30 can-hover:hover:opacity-70 dark:bg-white dark:text-black w-9"
+                                            style="
+                                              view-transition-name: var(
+                                                --vt-composer-speech-button
+                                              );
+                                            "
+                                          >
+                                            <div
+                                              class="flex items-center justify-center"
+                                            >
+                                              <svg
+                                                width="18"
+                                                height="18"
+                                                viewBox="0 0 18 18"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                class="icon-md"
+                                              >
+                                                <path
+                                                  d="M5.66699 14.4165V3.5835C5.66699 2.89314 6.22664 2.3335 6.91699 2.3335C7.6072 2.33367 8.16699 2.89325 8.16699 3.5835V14.4165C8.16699 15.1068 7.6072 15.6663 6.91699 15.6665C6.22664 15.6665 5.66699 15.1069 5.66699 14.4165ZM9.83301 11.9165V6.0835C9.83301 5.39325 10.3928 4.83367 11.083 4.8335C11.7734 4.8335 12.333 5.39314 12.333 6.0835V11.9165C12.333 12.6069 11.7734 13.1665 11.083 13.1665C10.3928 13.1663 9.83301 12.6068 9.83301 11.9165ZM1.5 10.2505V7.75049C1.5 7.06013 2.05964 6.50049 2.75 6.50049C3.44036 6.50049 4 7.06013 4 7.75049V10.2505C3.99982 10.9407 3.44025 11.5005 2.75 11.5005C2.05975 11.5005 1.50018 10.9407 1.5 10.2505ZM14 10.2505V7.75049C14 7.06013 14.5596 6.50049 15.25 6.50049C15.9404 6.50049 16.5 7.06013 16.5 7.75049V10.2505C16.4998 10.9407 15.9402 11.5005 15.25 11.5005C14.5598 11.5005 14.0002 10.9407 14 10.2505Z"
+                                                  fill="currentColor"
+                                                ></path>
+                                              </svg>
+                                            </div></button
+                                        ></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="absolute start-4 top-3 ms-[1px] flex items-center pb-px"
+                              ></div>
+                            </div>
+                          </div>
+                          <div class="w-full"></div>
+                        </form>
+                      </div>
+                      <input
+                        class="sr-only"
+                        type="file"
+                        aria-hidden="true"
+                        data-type="photos"
+                        id="upload-photos"
+                        accept="image/*"
+                        multiple=""
+                      /><input
+                        class="sr-only"
+                        type="file"
+                        aria-hidden="true"
+                        data-type="camera"
+                        id="upload-camera"
+                        accept="image/*"
+                        capture="environment"
+                        multiple=""
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="[display:var(--display-hidden-until-loaded,block)] md:absolute md:start-0 md:bottom-6 md:w-full"
+                >
+                  <div
+                    class="text-base mx-auto [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"
+                  >
+                    <div
+                      class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6"
+                    >
+                      <div class="block flex-1 z-20"></div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="text-base mx-auto [--thread-content-margin:--spacing(4)] @[37rem]:[--thread-content-margin:--spacing(6)] @[72rem]:[--thread-content-margin:--spacing(16)] px-(--thread-content-margin)"
+                >
+                  <div
+                    class="[--thread-content-max-width:32rem] @[34rem]:[--thread-content-max-width:40rem] @[64rem]:[--thread-content-max-width:48rem] mx-auto flex max-w-(--thread-content-max-width) flex-1 text-base gap-4 md:gap-5 lg:gap-6"
+                  >
+                    <div
+                      class="hidden min-h-[108px] max-w-full @lg/thread:block h-[70px]"
+                      style="opacity: 1"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <div
+      class="bg-token-sidebar-surface-primary relative z-1 shrink-0 overflow-x-hidden max-lg:w-0!"
+      style="width: 0px"
+    >
+      <div class="absolute h-full pointer-events-none" style="width: 400px">
+        <div class="flex h-full flex-col"></div>
+      </div>
+    </div>
+  </div>
+</div>

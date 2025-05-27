@@ -3,15 +3,11 @@ import { createRoot } from "react-dom/client";
 import "../styles/tailwind.css";
 import ContentScript from "./contentScript";
 
+// Initialize the content script
 function init() {
-  const appContainer = document.createElement("div");
-  document.body.appendChild(appContainer);
-  if (!appContainer) {
-    throw new Error("Can not find AppContainer");
-  }
-  const root = createRoot(appContainer);
-  console.log(appContainer);
-  root.render(<ContentScript />);
+  console.log('Initializing content script');
+  ContentScript();
 }
 
+// Run the initialization
 init();
