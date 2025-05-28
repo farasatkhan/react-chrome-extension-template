@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-start items-center gap-5">
-        <img src="assets/images/img.png" alt="logo" className="w-8 h-8" />
+        <img src="assets/images/icon.png" alt="logo" className="w-8 h-8" />
         <div className="space-x-4">
           <Link
             className="text-gray-300 hover:text-white text-lg font-semibold"
